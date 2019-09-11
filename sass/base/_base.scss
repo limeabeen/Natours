@@ -1,0 +1,43 @@
+/* Base CSS - No typography, no animations, no layouts*/
+*, *::after, 
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; /* This defines what 1 REM is */
+                      /* default font size is 16px. If we want a base 10 system, just divide 16/10 = 62.5 */
+                      /* default font size: some people change to see better. Not a good idea to set to px */
+                      /* So this mewans 1rem = 10px */
+
+    // These two media quieries fight each other if the screen size is 600 - 899 because they both apply. 
+    // That is why we place the larger one first. (Desktop First)
+    @include respond(tab-land) {
+        font-size: 56.25%; // 1rem = 9px. 9/16 = 56.25%
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%;  // 1rem = 8px. 8/16 = 50%
+    }
+
+    @include respond(big-desktop) {
+        font-size: 75%; // 1 rem = 12 px. 12/16 = 75%
+    }
+    
+}
+
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+// change highlighted text color
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}

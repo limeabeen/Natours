@@ -1,0 +1,44 @@
+.feature-box{
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    background-color: rgba($color-white, .8);
+    transition: transform .3s;
+
+    @include respond (tab-port) {
+        padding: 2rem;
+    }
+
+    &__icon {
+        font-size: 6rem;
+        margin: .5rem;
+        //Gradient with text clip!
+        display: inline-block;
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark); 
+        -webkit-background-clip: text; //Icon font is text based (so it can be clipped)
+        color: transparent;
+        /* 1.) Set gradient you want. 2.) Apply a background-clip. 3.) set color to transparent so that whatever you are trying to clip isn't visible */
+        @include respond (tab-port) {
+            margin: 0rem;
+        }
+    }
+    &:hover {
+        transform: translateY(-1rem);
+    }
+    &__anchor{
+        text-decoration: none;
+
+        &:link, 
+        &:visited{
+        color: $color-primary;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        &:active {
+            color: $color-primary-dark;
+        }
+    }
+}

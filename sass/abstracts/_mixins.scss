@@ -1,0 +1,63 @@
+/* Abstracts do not export css themselves */
+/* Reuseable block of code */
+
+@mixin clearfix {
+    &::after, &::before {
+        content: "";
+        display: table;
+        clear: both;
+        // no extra content, also, border background wraps around. Whatever comes after, will appear BELOW this clearfixed element
+    }
+    
+}
+
+@mixin linearGradientLight {
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary);
+}
+
+@mixin centerHV {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px cell phone
+600 - 900 Tablet portrait
+900 - 1200 Tablet landscape
+(1200 - 1800) Desktop Normal Styles
+1800+ - Big Desktop
+*/
+
+@mixin respond-phone {
+    @media (max-width: 600px) {@content };
+}
+
+/* $breakpoint argument choices
+    -phone
+    -tab-port
+    -tab-land
+    -big-desktop
+*/
+
+/* ORDER: Base + Typography > general layout + grid > page layout > components */
+
+// 1 em = 16px, unless users change it.
+// rem fails to work as intended in some browsers so we use em.
+// em is the best for media quiries.
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) {@content }; // 600px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) {@content }; // 900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) {@content }; // 1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (min-width: 112.5em) {@content }; // 1800 px
+    }
+}

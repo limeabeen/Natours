@@ -1,0 +1,69 @@
+.row {
+    max-width: $grid-width; // 114rem as of now
+    margin: 0 auto;
+    //center one block element inside another
+
+    &:not(:last-child) {
+        //selects everything that is NOT a last child
+        margin-bottom: $gutter-vertical;
+
+        @include respond(tab-port) {
+            margin-bottom: $gutter-vertical-small;
+        }
+    }
+
+    @include respond(tab-port) {
+        max-width: 50rem;
+        padding: 0 3rem;
+    }
+
+    @include clearfix;
+
+    [class^="col-"] { /*attribute selector: ^= means select attributes which begin with  ...*/
+        float: left;
+
+        &:not(:last-child){
+            margin-right: $gutter-horizontal;
+
+            @include respond(tab-port) {
+                margin-right: 0;
+                margin-bottom: $gutter-vertical-small;
+            }
+        }
+
+        @include respond(tab-port) {
+            width: 100% !important;
+        }
+
+    } 
+    .col-1-of-2 {
+        width: calc((100% - #{$gutter-horizontal}) / 2); // calc can mix units!
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+    }
+
+    .col-2-of-3 {
+        width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+    }
+
+    .col-2-of-4 {
+        width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+        // (100% - 3 gutters)
+        // divide that by 4 = total width for 4 1/4 sections. However, I need to combine one gutter and one section.
+        // That makes 1/4 section + 1/4 section (thus the times 2) plus tack on the equivenent space of one gutter.
+    }
+
+    .col-3-of-4 {
+        width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + (2 * #{$gutter-horizontal}));
+        // Divide it up first
+        // Take out space for gutters
+        // Mutiply by # of chunks (in this case 3)
+        // Add an equivenent of two gutters to total
+    }
+}
